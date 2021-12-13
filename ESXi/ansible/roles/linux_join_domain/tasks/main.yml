@@ -1,0 +1,71 @@
+---
+
+- name: Set hostname to fileserver
+  hostname:
+    name: fileserver-test
+  become: yes
+  
+- name: Install packages
+  become: yes
+  apt:
+    name: 
+      - dnsmasq 
+      - realmd
+      - sssd
+      - sssd-tools
+      - libnss-sss
+      - krb5-user
+      - adcli
+      - samba-common-bin
+    update_cache: yes
+
+- name: Disable systemd-resolved
+  args: 
+    executable: /bin/bash
+  become: yes
+  shell: |
+      systemctl disable systemd-resolved.service
+      systemctl stop systemd-resolved
+      
+- name: copy over krb5.conf
+  copy:
+    dest: /etc/krb5.conf
+    src: ../configs/krb5.conf
+    backup: yes
+
+- name: copy over sssd.conf
+  copy:
+    dest: /etc/sssd/sssd.conf
+    src: ../configs/sssd.conf
+    backup: yes
+
+- name: copy over resolv.conf
+  copy:
+    dest: /etc/resolv.conf
+    src: ../configs/resolv.conf
+    backup: yes
+
+
+- name: Reboot
+  shell: sleep 5 && reboot
+  async: 1
+  poll: 0
+  
+- name: Wait for reboot
+  wait_for_connection:
+    connect_timeout: 20
+    sleep: 5
+    delay: 5
+    timeout: 100
+  
+
+- name: Join the domain
+  command: realm join -v --user=vagrant dc.windomain.local
+  register: join
+  
+- debug: msg="{{ join.stdout_lines }}"
+
+
+
+
+

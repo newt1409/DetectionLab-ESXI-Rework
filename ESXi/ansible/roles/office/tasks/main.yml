@@ -1,0 +1,7 @@
+---
+
+- name: Install Microsoft Office
+  win_chocolatey:
+    name: office365business
+    state: present
+

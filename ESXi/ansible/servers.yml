@@ -1,0 +1,44 @@
+---
+
+#- hosts: logger
+#  roles:
+#    - logger
+#  become: yes
+#  tags: fileserver
+
+- hosts: dc
+  roles:
+#    - dc
+#    - common
+    - winlogbeats
+  tags: dc
+
+- hosts: wef
+  roles:
+    - wef
+    - common
+    - winlogbeats
+  tags: wef
+
+- hosts: exchange
+  roles:
+    - exchange
+    - common
+    - winlogbeats
+  tags: exchange
+
+- hosts: fileserver
+  roles:
+    - linux_join_domain
+    - fileserver
+  become: yes
+  tags: fileserver
+
+- hosts: mailcow
+  roles:
+#    - mailcow-prereq
+    - linux_join_domain
+    - mailcow-install
+  become: yes
+  tags: mailcow
+

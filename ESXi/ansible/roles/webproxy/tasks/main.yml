@@ -1,0 +1,39 @@
+---
+
+- name: Set hostname to webproxy
+  hostname:
+    name: webproxy
+  become: yes
+
+- name: Create a directory if it does not exist
+  file:
+    path: /topgen
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Download Install TopGen & Dependecies
+  args: 
+    executable: /bin/bash
+  become: yes
+  shell: |
+    #if [ -f //topgen/install.sh ]; then
+      #echo "[$(date +%H:%M:%S)]: TopGen is already installed"
+    #else
+      # Clone TopGen
+      echo "[$(date +%H:%Mss:%S)]: Downloading TopGen..."
+      cd / && git clone https://github.com/cmu-sei/topgen.git
+      sudo apt install nignx bind9 dovecot-imapd dovecot-pop3d
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install postfix
+      sudo /topgen/install.sh
+      #manual change the "multi_accept on" in the nginx.conf file
+      sudo ln -s /etc/nginx/nginx.conf /var/lib/topgen/etc/nginx.conf
+      topgen-scrape.sh
+      #topgen-vmail.sh need to set this up
+      topgen-mkdns.sh
+      
+    #fi
+  register: download_topgen
+  failed_when: "'error' in download_topgen.stderr"
+
+

@@ -1,0 +1,132 @@
+---
+
+- name: Set hostname to mailcow
+  hostname:
+    name: mailcow
+  become: yes
+
+- name: Create a directory if it does not exist
+  file:
+    path: /vagrant
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Copy vagrant resources
+  synchronize:
+    src: ../../Vagrant/resources
+    dest: /vagrant/
+  become: yes
+
+- name: Copy bootstrap file
+  copy:
+    src: ../../Vagrant/logger_bootstrap.sh
+    dest: /home/vagrant
+    owner: vagrant
+    group: vagrant
+    mode: u+x,g+x
+
+- name: Copy netplan file
+  copy:
+    src: ../resources/01-netcfg.yaml
+    dest: /tmp
+    owner: vagrant
+    group: vagrant
+
+- name: Copy the netplan file over as root
+  shell: "mv /tmp/01-netcfg.yaml /etc/netplan/01-netcfg.yaml"
+  become: yes
+
+- name: Apply the new netplan
+  shell: netplan apply
+  become: yes
+
+- name: Add APT Repositories
+  apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - "ppa:apt-fast/stable"
+    - "ppa:rmescandon/yq"
+  become: yes
+  
+- name: Install apt-fast
+  become: yes
+  apt:
+    name: apt-fast
+    update_cache: yes
+
+   
+
+- name: Install tools via apt-fast
+  args: 
+    executable: /bin/bash
+  become: yes
+  shell: |
+      echo "[$(date +%H:%M:%S)]: Running apt-fast install..."
+      apt-fast -qq install -y jq whois build-essential git unzip htop yq
+  register: apt_install_prerequisites
+  failed_when: "'error' in apt_install_prerequisites.stderr"
+
+- name: Update the MOTD
+  args: 
+    executable: /bin/bash
+  become: yes
+  shell: |
+    echo "[$(date +%H:%M:%S)]: Updating the MOTD..."
+    # Force color terminal
+    sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/g' /root/.bashrc
+    sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/g' /home/vagrant/.bashrc
+    # Remove some stock Ubuntu MOTD content
+    chmod -x /etc/update-motd.d/10-help-text
+    # Copy the DetectionLab MOTD
+    cp /vagrant/resources/logger/20-detectionlab /etc/update-motd.d/
+    chmod +x /etc/update-motd.d/20-detectionlab
+  register: modify_motd
+  failed_when: "'error' in modify_motd.stderr"
+
+- name: Test Prerequisites
+  args: 
+    executable: /bin/bash
+  become: yes
+  shell: |
+    for package in jq whois build-essential git unzip yq; do
+      echo "[$(date +%H:%M:%S)]: [TEST] Validating that $package is correctly installed..."
+      # Loop through each package using dpkg
+      if ! dpkg -S $package >/dev/null; then
+        # If which returns a non-zero return code, try to re-install the package
+        echo "[-] $package was not found. Attempting to reinstall."
+        apt-get -qq update && apt-get install -y $package
+        if ! which $package >/dev/null; then
+          # If the reinstall fails, give up
+          echo "[X] Unable to install $package even after a retry. Exiting."
+          exit 1
+        fi
+      else
+        echo "[+] $package was successfully installed!"
+      fi
+    done
+  register: test_prerequisites
+  failed_when: "'error' in test_prerequisites.stderr"
+
+- name: Install Docker
+  apt:
+    pkg:
+      - docker
+      - docker-compose
+    state: latest
+    update_cache: true
+        
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+

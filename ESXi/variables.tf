@@ -20,7 +20,7 @@ variable "esxi_password" { # Unspecified will prompt
 }
 
 variable "esxi_datastore" {
-  default = "datastore1"
+  default = "datastore2"
 }
 
 variable "vm_network" {
@@ -30,3 +30,4 @@ variable "vm_network" {
 variable "hostonly_network" {
   default = "HostOnly Network"
 }
+

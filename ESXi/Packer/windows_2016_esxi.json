@@ -33,7 +33,7 @@
       "remote_type": "esx5",
       "type": "vmware-iso",
       "version": 11,
-      "vm_name": "WindowsServer2016",
+      "vm_name": "LAB_CLONER_WindowsServer2016",
       "vnc_disable_password": true,
       "vmx_data": {
         "ethernet0.networkName": "{{user `esxi_network_with_dhcp_and_internet`}}",

@@ -1,0 +1,42 @@
+---
+
+ 
+- name: Look for Ghost directory  
+  win_stat: 
+    path: 'c:\tools\Ghost_Win'
+  register: ghostdir
+
+- name: Copy over Ghosts
+  copy:
+    src: ../Ghost_Win.zip
+    dest: c:\Tools\.
+  when: not ghostdir.stat.exists
+  
+- name: Unzip Ghost
+  win_unzip:
+    src: 'c:\Tools\Ghost_Win.zip'
+    dest: 'c:\Tools\Ghost_Win'
+    remote_src: yes
+  when: not ghostdir.stat.exists  
+
+- name: Look for Ghost again after installing or skipped install
+  win_stat: 
+    path: 'c:\tools\Ghost_Win'
+  register: ghostrun
+  when: not ghostdir.stat.exists
+  
+- name: Removing zip file
+  win_file:
+    path: c:\Tools\Ghost_Win.zip
+    state: absent
+  when: not ghostdir.stat.exists  
+
+- name: Starting Ghosts
+  win_shell: ".\\ghosts.exe"
+  args:
+    chdir: 'c:\Tools\Ghost_Win'
+  register: ghost
+  failed_when: "'Exception' in ghost.stdout"
+  when: ghostrun.stat.exists
+
+- debug: msg="{{ ghost.stdout_lines }}"

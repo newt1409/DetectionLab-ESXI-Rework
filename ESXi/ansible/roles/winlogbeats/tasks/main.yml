@@ -1,0 +1,15 @@
+---
+
+- name: Copy over install-winlogbeat.ps1
+  copy:
+    src: ../install-winlogbeat.ps1
+    dest: c:\vagrant\scripts
+    
+- name: Installing Winlogbeats
+  win_shell: ".\\install-winlogbeat.ps1"
+  args:
+    chdir: 'c:\vagrant\scripts'
+  register: winlogbeat
+  failed_when: "'Exception' in winlogbeat.stdout"
+
+- debug: msg="{{ winlogbeat.stdout_lines }}"

@@ -50,7 +50,7 @@
             "skip_export": true,
             "tools_upload_flavor": "linux",
             "type": "vmware-iso",
-            "vm_name": "Ubuntu2004",
+            "vm_name": "LAB_CLONER_Ubuntu2004",
             "vmx_data": {
                 "ethernet0.networkName": "{{user `esxi_network_with_dhcp_and_internet` }}",
                 "cpuid.coresPerSocket": "1",
@@ -117,3 +117,4 @@
         "version": "TIMESTAMP"
     }
 }
+

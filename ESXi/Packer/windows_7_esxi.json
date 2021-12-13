@@ -1,0 +1,53 @@
+{
+  "builders": [
+    {
+      "type": "vsphere-iso",
+
+      "vcenter_server":      "10.10.0.9",
+      "username":            "xxxxx",
+      "password":            "xxxxx",
+      "insecure_connection": "true",
+      "datacenter": "DFIR Range",
+
+      "vm_name": "windows7",
+      "cluster": "HV Cluster",
+      "datastore": "hv1",
+
+      "guest_os_type": "windows7_64Guest",
+
+      "communicator": "winrm",
+      "winrm_username": "xxxxx",
+      "winrm_password": "xxxxx",
+      "boot_order": "disk,cdrom",
+
+      "CPUs":             2,
+      "CPU_limit":        -1,
+      "RAM":              4096,
+      "RAM_reserve_all": false,
+
+      "disk_controller_type":  "pvscsi",
+      "disk_size":        40960,
+      "disk_thin_provisioned": true,
+
+      "network_card": "vmxnet3",
+      "network": "d-range-dfir",
+
+      "iso_paths": [
+        "[NAS ISO Store] Windows/en_windows_7_professional_with_sp1_x64_dvd_u_676939.iso",
+        "[hv1] Windows/vmware-tools.iso"
+      ],
+
+      "floppy_files": [
+        "{{template_dir}}/setup/"
+      ]
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "windows-shell",
+      "inline": ["dir c:\\"]
+    }
+  ]
+}
+
