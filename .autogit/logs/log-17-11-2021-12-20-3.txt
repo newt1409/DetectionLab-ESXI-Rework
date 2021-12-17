@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Fri Dec 17 2021 12:20:03 GMT-0600 (Central Standard Time)
+------------------------------------------------------
+
+Modified files:
+
+
+Created files:
+* .autogit/logs/log-17-11-2021-11-49-56.txt
+* Packer/scripts/vm-guest-tools_win7.bat
+
+
+Deleted files:
+
+
+Renamed files:
