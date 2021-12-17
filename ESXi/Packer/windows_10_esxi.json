@@ -6,7 +6,7 @@
       "boot_wait": "6m",
       "boot_command": "",
       "communicator": "winrm",
-      "disk_size": 61440,
+      "disk_size": 30720,
       "floppy_files": [
         "{{user `autounattend`}}",
         "../../Packer/floppy/WindowsPowershell.lnk",
