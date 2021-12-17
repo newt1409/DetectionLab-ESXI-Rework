@@ -44,19 +44,20 @@
 - name: fixing hardcoded IPs for personal domain ip schema (provision.ps1)
   win_shell: (Get-Content "c:\vagrant\scripts\provision.ps1").replace('192.168.56.102','10.0.2.2') | Set-Content -Path "c:\vagrant\scripts\provision.ps1"
   when: not vag.stat.exists
-- name: fixing hardcoded IPs for personal domain ip schema (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('192.168.56.102','10.0.2.2') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
+
+- pause:
+
+- name: changing DNS in create domain script (create-domain.ps1)
+  win_shell: (Get-Content "c:\vagrant\scripts\create-domain.ps1").replace('8.8.8.8','10.0.0.10') | Set-Content -Path "c:\vagrant\scripts\create-domain.ps1"
   when: not vag.stat.exists
-- name: fixing hardcoded IPs for personal domain ip schema (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('192.168.56.','10.0.2.2') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
+- name: changing DNS in create domain script (create-domain.ps1)
+  win_shell: (Get-Content "c:\vagrant\scripts\create-domain.ps1").replace('4.4.4.4','10.0.0.10') | Set-Content -Path "c:\vagrant\scripts\create-domain.ps1"
   when: not vag.stat.exists
-- name: changing win10 to win10-* for more boxes (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('-eq "win10"','-like "win10*"') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
+- name: changing DNS in create domain script (create-domain.ps1)
+  win_shell: (Get-Content "c:\vagrant\scripts\create-domain.ps1").replace('InstallDns:$true','InstallDns') | Set-Content -Path "c:\vagrant\scripts\create-domain.ps1"
   when: not vag.stat.exists
-- name: changing windomain.local to windomain to join domain correctly (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('windomain.local','windomain') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
-  when: not vag.stat.exists
-  
+
+
 - name: Create the Domain
   win_shell: .\\provision.ps1
   args:
@@ -86,6 +87,9 @@
   failed_when: "'Exception' in ou_creation.stderr"
 
 - debug: msg="{{ ou_creation.stdout_lines }}"
+
+#- name: add DNS record so windomain.local can be queried when using gpupdate 
+#  win_shell: Add-DnsServerResourceRecordA -Name "windomain.local" -ZoneName "windomain.local" -AllowUpdateAny -IPv4Address "172.18.99.23" -TimeToLive "01:00:00"
 
 - name: Configure WEF GPO
   win_shell: .\\configure-wef-gpo.ps1
