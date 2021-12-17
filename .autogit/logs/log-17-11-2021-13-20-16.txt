@@ -1,0 +1,18 @@
+-------------------- Auto-Git Log --------------------
+		Fri Dec 17 2021 13:20:16 GMT-0600 (Central Standard Time)
+------------------------------------------------------
+
+Modified files:
+* ESXi/main.tf.orig
+
+
+Created files:
+* .autogit/logs/log-17-11-2021-12-50-10.txt
+* ESXi/debug.txt
+
+
+Deleted files:
+* ESXi/ansible/inventory.yml
+
+
+Renamed files:
