@@ -28,15 +28,15 @@ resource "esxi_guest" "dc" {
   power              = "on"
   clone_from_vm = "LAB_CLONER_WindowsServer2016"
   # This is the network that bridges your host machine with the ESXi VM
-#  network_interfaces {
-#    virtual_network = var.vm_network
-#    mac_address     = "00:50:56:a1:b1:c2"
-#    nic_type        = "e1000"
-#  }
+  network_interfaces {
+    virtual_network = var.vm_network
+    mac_address     = "00:50:56:a1:b1:c2"
+    nic_type        = "e1000"
+  }
   # This is the local network that will be used for Kaiju.local addressing
   network_interfaces {
     virtual_network = var.hostonly_network
-    mac_address     = "00:50:56:a1:b1:c2"
+    mac_address     = "00:50:56:a1:b1:c4"
     nic_type        = "e1000"
   }
   guest_startup_timeout  = 45
