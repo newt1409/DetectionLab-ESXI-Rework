@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Fri Dec 17 2021 14:49:58 GMT-0600 (Central Standard Time)
+------------------------------------------------------
+
+Modified files:
+* ESXi/Clients.tf
+* ESXi/Servers.tf
+
+
+Created files:
+* .autogit/logs/log-17-11-2021-13-50-23.txt
+
+
+Deleted files:
+
+
+Renamed files:
