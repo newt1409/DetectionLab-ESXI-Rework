@@ -1,0 +1,68 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create
+[0m
+Terraform will perform the following actions:
+
+[1m  # esxi_guest.dc[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "esxi_guest" "dc" {
+      [32m+[0m [0m[1m[0mboot_disk_size[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mboot_disk_type[0m[0m         = "thin"
+      [32m+[0m [0m[1m[0mclone_from_vm[0m[0m          = "LAB_CLONER_WindowsServer2016"
+      [32m+[0m [0m[1m[0mdisk_store[0m[0m             = "datastore2"
+      [32m+[0m [0m[1m[0mguest_name[0m[0m             = "dc"
+      [32m+[0m [0m[1m[0mguest_shutdown_timeout[0m[0m = 30
+      [32m+[0m [0m[1m[0mguest_startup_timeout[0m[0m  = 45
+      [32m+[0m [0m[1m[0mguestos[0m[0m                = "windows9srv-64"
+      [32m+[0m [0m[1m[0mid[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0mip_address[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mmemsize[0m[0m                = "8192"
+      [32m+[0m [0m[1m[0mnotes[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mnumvcpus[0m[0m               = "4"
+      [32m+[0m [0m[1m[0movf_properties_timer[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mpower[0m[0m                  = "on"
+      [32m+[0m [0m[1m[0mresource_pool_name[0m[0m     = "/"
+      [32m+[0m [0m[1m[0mvirthwver[0m[0m              = (known after apply)
+
+      [32m+[0m [0mnetwork_interfaces {
+          [32m+[0m [0m[1m[0mmac_address[0m[0m     = "00:50:56:a1:b1:c2"
+          [32m+[0m [0m[1m[0mnic_type[0m[0m        = "e1000"
+          [32m+[0m [0m[1m[0mvirtual_network[0m[0m = "windomain.local"
+        }
+    }
+
+[1m  # esxi_guest.win10-1[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "esxi_guest" "win10-1" {
+      [32m+[0m [0m[1m[0mboot_disk_size[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mboot_disk_type[0m[0m         = "thin"
+      [32m+[0m [0m[1m[0mclone_from_vm[0m[0m          = "LAB_CLONER_Windows10"
+      [32m+[0m [0m[1m[0mdisk_store[0m[0m             = "datastore2"
+      [32m+[0m [0m[1m[0mguest_name[0m[0m             = "win10-1"
+      [32m+[0m [0m[1m[0mguest_shutdown_timeout[0m[0m = 30
+      [32m+[0m [0m[1m[0mguest_startup_timeout[0m[0m  = 45
+      [32m+[0m [0m[1m[0mguestos[0m[0m                = "windows9-64"
+      [32m+[0m [0m[1m[0mid[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0mip_address[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mmemsize[0m[0m                = "4096"
+      [32m+[0m [0m[1m[0mnotes[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mnumvcpus[0m[0m               = "2"
+      [32m+[0m [0m[1m[0movf_properties_timer[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mpower[0m[0m                  = "on"
+      [32m+[0m [0m[1m[0mresource_pool_name[0m[0m     = "/"
+      [32m+[0m [0m[1m[0mvirthwver[0m[0m              = (known after apply)
+
+      [32m+[0m [0mnetwork_interfaces {
+          [32m+[0m [0m[1m[0mmac_address[0m[0m     = "00:50:57:a1:b1:c1"
+          [32m+[0m [0m[1m[0mnic_type[0m[0m        = "e1000"
+          [32m+[0m [0m[1m[0mvirtual_network[0m[0m = "windomain.local"
+        }
+    }
+
+[0m[1mPlan:[0m 2 to add, 0 to change, 0 to destroy.
+[0m[0m[1m
+Do you want to perform these actions?[0m
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  [1mEnter a value:[0m [0m
