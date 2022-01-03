@@ -9,17 +9,13 @@
   win_reboot:
   when: res.reboot_required
 
-
-#- name: Restart Net Adapter for DHCP
-#  win_shell: "$adapter = (get-netadapter).name; restart-netadapter $adapter"
+# This needs to be made idempodent
+- name: Set HostOnly IP Address
+  win_shell: "If (-not(get-netipaddress | where {$_.IPAddress -eq '192.168.56.103'})) {$adapter = (get-netadapter | where {$_.MacAddress -eq '00-50-56-A1-B4-C4'}).Name; New-NetIPAddress –InterfaceAlias $adapter –AddressFamily IPv4 -IPAddress 192.168.56.103 –PrefixLength 24 -DefaultGateway 192.168.56.1 } Else { Write-Host 'IP Address Already Created.' }"
 
 # This needs to be made idempodent
-#- name: Set HostOnly IP Address
-#  win_shell: "If (-not(get-netipaddress | where {$_.IPAddress -eq '192.168.38.103'})) {$adapter = (get-netadapter | where {$_.MacAddress -eq '00-50-56-A1-B4-C4'}).Name; New-NetIPAddress –InterfaceAlias $adapter –AddressFamily IPv4 -IPAddress 192.168.38.103 –PrefixLength 24 -DefaultGateway 192.168.38.1 } Else { Write-Host 'IP Address Already Created.' }"
-
-# This needs to be made idempodent
-#- name: Set HostOnly DNS Address
-#  win_shell: "$adapter = (get-netadapter | where {$_.MacAddress -eq '00-50-56-A1-B4-C4'}).Name; Set-DnsClientServerAddress -InterfaceAlias $adapter -ServerAddresses 192.168.38.102,8.8.8.8"
+- name: Set HostOnly DNS Address
+  win_shell: "$adapter = (get-netadapter | where {$_.MacAddress -eq '00-50-56-A1-B4-C4'}).Name; Set-DnsClientServerAddress -InterfaceAlias $adapter -ServerAddresses 192.168.56.102,8.8.8.8"
 
 - name: Install git
   win_chocolatey:
@@ -37,35 +33,8 @@
     chdir: 'c:\'
   when: not dir.stat.exists
 
-- name: Check if existing Vagrant directory
-  win_stat:
-    path: 'c:\vagrant'
-  register: vag
-
 - name: Copy scripts to c:\vagrant
   win_shell: Copy-Item -Recurse c:\DetectionLab\Vagrant c:\vagrant
-  when: not vag.stat.exists
-
-
-#changes to make larger personal domian
-- name: fixing hardcoded IPs for personal domain ip schema (provision.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\provision.ps1").replace('192.168.56.102','10.0.2.2') | Set-Content -Path "c:\vagrant\scripts\provision.ps1"
-  when: not vag.stat.exists
-- name: fixing hardcoded IPs for personal domain ip schema (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('192.168.56.102','10.0.2.2') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
-  when: not vag.stat.exists
-- name: fixing hardcoded IPs for personal domain ip schema (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('192.168.56.','10.0.2.2') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
-  when: not vag.stat.exists
-- name: changing win10 to win10-* for more boxes (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('-eq "win10"','-contains "win10"') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
-  when: not vag.stat.exists
-- name: changing win10 to win10-* for more boxes (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('-ne "win10"','-contains "win10"') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
-  when: not vag.stat.exists
-- name: changing windomain.local to windomain to join domain correctly (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('windomain.local','windomain') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
-  when: not vag.stat.exists
 
 - name: Join the Domain
   win_shell: .\\provision.ps1

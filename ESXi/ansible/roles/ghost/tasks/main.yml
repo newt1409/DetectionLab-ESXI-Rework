@@ -44,21 +44,16 @@
 #  win_shell: "sc.exe delete Ghost"
 
 - name: Creating Ghost link in startup folder
-  win_shell: |
-    "if (get-service) {
-       sc.exe delete Ghost
-     } else { 
-       New-Item -ItemType SymbolicLink -Path 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp' -Name 'ghost.lnk' -Value 'C:\\Tools\Ghost_Win\ghosts.exe'
-     }"
+  win_shell: New-Item -ItemType SymbolicLink -Path 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp' -Name 'ghost.lnk' -Value 'C:\\Tools\Ghost_Win\ghosts.exe'
   register: ghost_create
   failed_when: "'Exception' in ghost_create.stdout"
   when: ghost_installed.stat.exists
 
-- name: Make the boxes login by themselves which initiates ghost and normal logins
-  win_shell: |
-    REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 1 /f
-    REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d vagrant /f
-    REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d vagrant /f
+#- name: Make the boxes login by themselves which initiates ghost and normal logins
+#  win_shell: |
+#    REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 1 /f
+#    REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d vagrant /f
+#    REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d vagrant /f
 #    REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultDomainName /t REG_SZ /d windomain /f    
 
 - name: Reboot for settings to work

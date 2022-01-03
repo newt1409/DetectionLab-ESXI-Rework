@@ -98,7 +98,7 @@ setup.template.settings:
   #index.codec: best_compression
   #_source.enabled: false
 setup.ilm.enabled: yes
-setup.ilm.pattern: "{now/M{yyyy-MM-DD}}"
+setup.ilm.pattern: "{now/d}}"
 #================================ General =====================================
 
 # The name of the shipper that publishes the network data. It can be used to group
@@ -163,7 +163,7 @@ setup.dashboards.enabled: false
 #-------------------------- Elasticsearch output ------------------------------
 output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: ["10.0.2.3:9200"]
+  hosts: ["192.168.56.101:9200"]
   idle_time: "10s"
   max_retries: 5
   bulk_max_size: 1

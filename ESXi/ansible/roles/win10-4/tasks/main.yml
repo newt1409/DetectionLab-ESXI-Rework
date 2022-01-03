@@ -9,11 +9,11 @@
   win_reboot:
   when: res.reboot_required
 
-#- name: Set HostOnly IP Address
-#  win_shell: "If (-not(get-netipaddress | where {$_.IPAddress -eq '192.168.38.104'})) {$adapter = (get-netadapter | where {$_.MacAddress -eq '00-50-57-A1-B1-C1'}).Name; New-NetIPAddress –InterfaceAlias $adapter –AddressFamily IPv4 -IPAddress 192.168.38.104 –PrefixLength 24 -DefaultGateway 192.168.38.1 } Else { Write-Host 'IP Address Already Created.' }"
+- name: Set HostOnly IP Address
+  win_shell: "If (-not(get-netipaddress | where {$_.IPAddress -eq '192.168.38.104'})) {$adapter = (get-netadapter | where {$_.MacAddress -eq '00-50-57-A1-B1-C4'}).Name; New-NetIPAddress –InterfaceAlias $adapter –AddressFamily IPv4 -IPAddress 192.168.38.104 –PrefixLength 24 -DefaultGateway 192.168.38.1 } Else { Write-Host 'IP Address Already Created.' }"
 
-#- name: Set HostOnly DNS Address
-#  win_shell: "$adapter = (get-netadapter | where {$_.MacAddress -eq '00-50-57-A1-B1-C2'}).Name; Set-DnsClientServerAddress -InterfaceAlias $adapter -ServerAddresses 192.168.38.102,8.8.8.8"
+- name: Set HostOnly DNS Address
+  win_shell: "$adapter = (get-netadapter | where {$_.MacAddress -eq '00-50-57-A1-B1-C4'}).Name; Set-DnsClientServerAddress -InterfaceAlias $adapter -ServerAddresses 192.168.38.102,8.8.8.8"
 
 - name: Install git
   win_chocolatey:
@@ -31,47 +31,18 @@
     chdir: 'c:\'
   when: not dir.stat.exists
 
-- name: Check if existing Vagrant directory
-  win_stat:
-    path: 'c:\vagrant'
-  register: vag
-
 - name: Copy scripts to c:\vagrant
   win_shell: Copy-Item -Recurse c:\DetectionLab\Vagrant c:\vagrant
-  when: not vag.stat.exists
 
 - name: Making Windows10 Great Again
   win_shell:  .\\MakeWindows10GreatAgain.ps1
   args:
     chdir: 'c:\vagrant\scripts'
 
-#changes to make larger personal domian
-- name: fixing hardcoded IPs for personal domain ip schema (provision.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\provision.ps1").replace('192.168.56.102','10.0.2.2') | Set-Content -Path "c:\vagrant\scripts\provision.ps1"
-  when: not vag.stat.exists
-- name: fixing hardcoded IPs for personal domain ip schema (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('192.168.56.102','10.0.2.2') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
-  when: not vag.stat.exists
-- name: fixing hardcoded IPs for personal domain ip schema (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('192.168.56.','10.0.2.2') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
-  when: not vag.stat.exists
-- name: changing win10 to win10-* for more boxes (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('-eq "win10"','-like "win10*"') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
-  when: not vag.stat.exists
-- name: changing windomain.local to windomain to join domain correctly (join-domain.ps1)
-  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('windomain.local','windomain') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1"
-  when: not vag.stat.exists
-
 - name: Join the Domain
   win_shell: .\\provision.ps1
   args:
     chdir: 'c:\vagrant\scripts'
-
-- name: Open Ports for domain infastructure
-  win_shell: New-NetFirewallRule -DisplayName 'DomainPorts' -Profile @('Domain', 'Private', 'Public') -Direction Inbound -Action Allow -Protocol TCP -LocalPort 135,137,138,139,445
-
-- name: Set profiles to allow inbound traffic
-  win_shell: Set-NetFirewallProfile -Name @('Domain', 'Private', 'Public') -DefaultInboundAction Allow
 
 - name: Update group policy
   win_shell: "gpupdate /force"
@@ -95,6 +66,3 @@
 
 - name: DetectionLab Menu
   win_shell: "\"C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe -xml c:\\vagrant\\resources\\windows\\MenuSettings.xml\""
-
-
-

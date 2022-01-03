@@ -9,14 +9,14 @@
 
 - debug: msg="{{ palantir_wef.stdout_lines }}"
   
-- name: Installing osquery
-  win_shell: ".\\install-osquery.ps1"
-  args:
-    chdir: 'c:\vagrant\scripts'
-  register: install_osquery
-  failed_when: "'Exception' in install_osquery.stdout"
+#- name: Installing osquery
+#  win_shell: ".\\install-osquery.ps1"
+#  args:
+#    chdir: 'c:\vagrant\scripts'
+#  register: install_osquery
+#  failed_when: "'Exception' in install_osquery.stdout"
 
-- debug: msg="{{ install_osquery.stdout_lines }}"
+#- debug: msg="{{ install_osquery.stdout_lines }}"
 
 - name: Installing SysInternals Tools
   win_shell: ".\\install-sysinternals.ps1"
@@ -27,14 +27,14 @@
 
 - debug: msg="{{ sysinternals.stdout_lines }}"
 
-- name: Installing Velociraptor
-  win_shell: ".\\install-velociraptor.ps1"
-  args:
-    chdir: 'c:\vagrant\scripts'
-  register: velociraptor
-  failed_when: "'Exception' in velociraptor.stdout"
+#- name: Installing Velociraptor
+#  win_shell: ".\\install-velociraptor.ps1"
+#  args:
+#    chdir: 'c:\vagrant\scripts'
+#  register: velociraptor
+#  failed_when: "'Exception' in velociraptor.stdout"
 
-- debug: msg="{{ velociraptor.stdout_lines }}"
+#- debug: msg="{{ velociraptor.stdout_lines }}"
 
 - name: Installing AutorunsToWineventlog
   win_shell: ".\\install-autorunstowineventlog.ps1"
@@ -45,14 +45,14 @@
 
 - debug: msg="{{ autorunstowineventlog.stdout_lines }}"
 
-- name: Installing Red Team Tooling
-  win_shell: ".\\install-redteam.ps1"
-  args:
-    chdir: 'c:\vagrant\scripts'
-  register: redteam
-  failed_when: "'Exception' in redteam.stdout"
+#- name: Installing Red Team Tooling
+#  win_shell: ".\\install-redteam.ps1"
+#  args:
+#    chdir: 'c:\vagrant\scripts'
+#  register: redteam
+#  failed_when: "'Exception' in redteam.stdout"
 
-- debug: msg="{{ redteam.stdout_lines }}"
+#- debug: msg="{{ redteam.stdout_lines }}"
 
 - name: Install Utilities
   win_shell: ".\\install-utilities.ps1"
