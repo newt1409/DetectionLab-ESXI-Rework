@@ -239,7 +239,7 @@ $service = Get-WmiObject -Class Win32_Service -Filter "Name='winlogbeat'"
 If (-not ($service)) {
   choco install winlogbeat -y
 
-  $confFile | Out-File -FilePath C:\ProgramData\chocolatey\lib\winlogbeat\tools\winlogbeat.yml -Encoding ascii
+  $confFile | Out-File -FilePath C:\ProgramData\chocolatey\lib\winlogbeat\tools\winlogbeat.yml -Encoding ascii -Force
 
   sc.exe failure winlogbeat reset= 30 actions= restart/5000
   Start-Service winlogbeat

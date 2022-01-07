@@ -4,7 +4,7 @@
   copy:
     src: ../install-winlogbeat.ps1
     dest: c:\vagrant\scripts
-    
+
 - name: Installing Winlogbeats
   win_shell: ".\\install-winlogbeat.ps1"
   args:
