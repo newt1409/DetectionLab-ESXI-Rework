@@ -98,7 +98,7 @@ setup.template.settings:
   #index.codec: best_compression
   #_source.enabled: false
 setup.ilm.enabled: auto
-setup.ilm.rollover_alias: "winlogbeats"
+#setup.ilm.rollover_alias: "winlogbeats"
 setup.ilm.pattern: "{now/d}"
 #================================ General =====================================
 
