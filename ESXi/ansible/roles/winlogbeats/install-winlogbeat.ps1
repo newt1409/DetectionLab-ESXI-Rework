@@ -97,8 +97,9 @@ setup.template.settings:
   index.number_of_shards: 1
   #index.codec: best_compression
   #_source.enabled: false
-setup.ilm.enabled: yes
-setup.ilm.pattern: "{now/d}}"
+setup.ilm.enabled: auto
+setup.ilm.rollover_alias: "winlogbeat"
+setup.ilm.pattern: "{now/d}"
 #================================ General =====================================
 
 # The name of the shipper that publishes the network data. It can be used to group
