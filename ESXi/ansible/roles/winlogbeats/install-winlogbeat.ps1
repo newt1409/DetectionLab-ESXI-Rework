@@ -97,8 +97,9 @@ setup.template.settings:
   index.number_of_shards: 3
   #index.codec: best_compression
   #_source.enabled: false
-setup.ilm.enabled: yes
-#setup.ilm.rollover_alias: "winlogbeat"
+setup.ilm.enabled: auto
+setup.ilm.rollover_alias: "winlogbeats"
+setup.ilm.policy_name: "winlogbeaters"
 setup.ilm.pattern: "{now/d}"
 #================================ General =====================================
 
