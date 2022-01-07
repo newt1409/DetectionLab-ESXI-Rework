@@ -39,6 +39,10 @@
   args:
     chdir: 'c:\vagrant\scripts'
 
+#changes to make larger personal domian
+- name: changing win10 to win10-* for more boxes (join-domain.ps1)
+  win_shell: (Get-Content "c:\vagrant\scripts\join-domain.ps1").replace('-eq "win10"','-like "win10*"') | Set-Content -Path "c:\vagrant\scripts\join-domain.ps1" -Force
+
 - name: Join the Domain
   win_shell: .\\provision.ps1
   args:
