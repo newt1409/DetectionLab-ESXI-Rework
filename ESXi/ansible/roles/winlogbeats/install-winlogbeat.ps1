@@ -94,11 +94,11 @@ winlogbeat.event_logs:
 #==================== Elasticsearch template setting ==========================
 
 setup.template.settings:
-  index.number_of_shards: 1
+  index.number_of_shards: 3
   #index.codec: best_compression
   #_source.enabled: false
 setup.ilm.enabled: auto
-setup.ilm.rollover_alias: "winlogbeat"
+setup.ilm.rollover_alias: "winlogbeats"
 setup.ilm.pattern: "{now/d}"
 #================================ General =====================================
 
