@@ -2,15 +2,15 @@
 
 - hosts: dc
   roles:
-    - dc
-    - common
+#    - dc
+#    - common
     - winlogbeats
   tags: dc
 
 - hosts: exchange
   roles:
 #    - exchange
-    - common
+#    - common
     - winlogbeats
   tags: exchange
 
@@ -32,10 +32,10 @@
   
 - hosts: win10-3
   roles:
-    - win10-3
-    - common
+#    - win10-3
+#    - common
     - winlogbeats
-    - ghost
+#    - ghost
   tags: win10-3
 
 - hosts: win10-4
