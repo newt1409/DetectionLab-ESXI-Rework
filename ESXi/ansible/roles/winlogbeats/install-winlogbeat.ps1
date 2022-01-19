@@ -172,14 +172,14 @@ output.elasticsearch:
   flush_interval: 10
   timeout: "45s"
   # Optional protocol and basic auth credentials.
-  #protocol: "https" 
+  protocol: "https" 
   username: "elastic" 
   password: "password" 
 
 #----------------------------- Logstash output --------------------------------
 #output.logstash:
   # The Logstash hosts
-  #hosts: ["10.0.2.3:5044"]
+  #hosts: ["192.168.56.101:5044"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
