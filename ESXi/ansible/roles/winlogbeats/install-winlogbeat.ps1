@@ -172,7 +172,7 @@ output.elasticsearch:
   flush_interval: 10
   timeout: "45s"
   # Optional protocol and basic auth credentials.
-  protocol: "https" 
+  #protocol: "http" 
   username: "elastic" 
   password: "password" 
 
