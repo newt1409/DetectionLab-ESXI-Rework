@@ -163,23 +163,23 @@ setup.dashboards.enabled: false
 # Configure what output to use when sending the data collected by the beat.
 
 #-------------------------- Elasticsearch output ------------------------------
-output.elasticsearch:
+#output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: ["192.168.56.101:9200"]
-  idle_time: "10s"
-  max_retries: 5
-  bulk_max_size: 1
-  flush_interval: 10
-  timeout: "45s"
+  #hosts: ["192.168.56.101:9200"]
+  #idle_time: "10s"
+  #max_retries: 5
+  #bulk_max_size: 1
+  #flush_interval: 10
+  #timeout: "45s"
   # Optional protocol and basic auth credentials.
   #protocol: "http" 
-  username: "elastic" 
-  password: "password" 
+  #username: "elastic" 
+  #password: "password" 
 
 #----------------------------- Logstash output --------------------------------
-#output.logstash:
+output.logstash:
   # The Logstash hosts
-  #hosts: ["192.168.56.101:5044"]
+  hosts: ["192.168.56.101:5044"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
