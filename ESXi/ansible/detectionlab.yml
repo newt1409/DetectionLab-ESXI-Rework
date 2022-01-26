@@ -32,7 +32,7 @@
   
 - hosts: win10-3
   roles:
-#    - win10-3
+    - win10-3
 #    - common
     - winlogbeats
 #    - ghost
