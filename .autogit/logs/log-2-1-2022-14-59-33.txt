@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Wed Feb 02 2022 14:59:33 GMT-0600 (Central Standard Time)
+------------------------------------------------------
+
+Modified files:
+* ESXi/Clients.tf
+* ESXi/Servers.tf
+
+
+Created files:
+* .autogit/logs/log-2-1-2022-14-29-26.txt
+
+
+Deleted files:
+
+
+Renamed files:
