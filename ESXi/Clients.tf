@@ -15,11 +15,11 @@ resource "esxi_guest" "win10-1" {
   power              = "on"
   clone_from_vm = "LAB_CLONER_Windows10"
   # This is the network that bridges your host machine with the ESXi VM
-  network_interfaces {
-    virtual_network = var.vm_network
-    mac_address     = "00:50:57:a1:b2:c1"
-    nic_type        = "e1000"
-  }
+#  network_interfaces {
+#    virtual_network = var.vm_network
+#    mac_address     = "00:50:57:a1:b2:c1"
+#    nic_type        = "e1000"
+#  }
   # This is the local network that will be used for Kaiju.local addressing
   network_interfaces {
     virtual_network = var.hostonly_network
@@ -43,11 +43,11 @@ resource "esxi_guest" "win10-2" {
   power              = "on"
   clone_from_vm = "LAB_CLONER_Windows10"
   # This is the network that bridges your host machine with the ESXi VM
-  network_interfaces {
-    virtual_network = var.vm_network
-    mac_address     = "00:50:57:a1:b2:c2"
-    nic_type        = "e1000"
-  }
+#  network_interfaces {
+#    virtual_network = var.vm_network
+#    mac_address     = "00:50:57:a1:b2:c2"
+#    nic_type        = "e1000"
+#  }
   # This is the local network that will be used for Kaiju.local addressing
   network_interfaces {
     virtual_network = var.hostonly_network
@@ -71,11 +71,11 @@ resource "esxi_guest" "win10-3" {
   power              = "on"
   clone_from_vm = "LAB_CLONER_Windows10"
   # This is the network that bridges your host machine with the ESXi VM
-  network_interfaces {
-    virtual_network = var.vm_network
-    mac_address     = "00:50:57:a1:b2:c3"
-    nic_type        = "e1000"
-  }
+#  network_interfaces {
+#    virtual_network = var.vm_network
+#    mac_address     = "00:50:57:a1:b2:c3"
+#    nic_type        = "e1000"
+#  }
   # This is the local network that will be used for Kaiju.local addressing
   network_interfaces {
     virtual_network = var.hostonly_network
@@ -99,11 +99,11 @@ resource "esxi_guest" "win10-4" {
   power              = "on"
   clone_from_vm = "LAB_CLONER_Windows10"
   # This is the network that bridges your host machine with the ESXi VM
-  network_interfaces {
-    virtual_network = var.vm_network
-    mac_address     = "00:50:57:a1:b2:c4"
-    nic_type        = "e1000"
-  }
+#  network_interfaces {
+#    virtual_network = var.vm_network
+#    mac_address     = "00:50:57:a1:b2:c4"
+#    nic_type        = "e1000"
+#  }
   # This is the local network that will be used for Kaiju.local addressing
   network_interfaces {
     virtual_network = var.hostonly_network
