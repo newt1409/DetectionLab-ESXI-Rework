@@ -9,7 +9,7 @@
 
 - hosts: exchange
   roles:
-    - exchange
+#    - exchange
     - common
     - winlogbeats
   tags: exchange
@@ -32,16 +32,16 @@
   
 - hosts: win10-3
   roles:
-    - win10-3
-    - common
+#    - win10-3
+#    - common
     - winlogbeats
-    - ghost
+#    - ghost
   tags: win10-3
 
 - hosts: win10-4
   roles:
-    - win10-4
-    - common
+#    - win10-4
+#    - common
     - winlogbeats
-    - ghost
+#    - ghost
   tags: win10-4    
