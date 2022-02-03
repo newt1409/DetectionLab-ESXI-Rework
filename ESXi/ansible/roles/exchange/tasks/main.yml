@@ -57,6 +57,9 @@
   register: exchange_prereqs
   changed_when: "'A reboot is required to continue installation of exchange.' in exchange_prereqs.stdout"
 
+- name: Fix SSL/TLS secured connection
+  win_shell: "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12"
+
 - name: Reboot After Installing Exchange PreReqs
   win_reboot:
     msg: "Exchange Prereqs installed. Rebooting..."
