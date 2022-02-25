@@ -4,7 +4,7 @@
   roles:
 #    - dc
 #    - common
-#    - winlogbeats
+    - winlogbeats
   tags: dc
 
 - hosts: exchange
