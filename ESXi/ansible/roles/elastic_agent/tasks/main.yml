@@ -6,12 +6,9 @@
   register: agent_folder
 
 - name: Uninstalling Elastic Agent
-  expect:
-    command: '\elastic-agent.exe uninstall'
+  win_shell: 'echo y | .\elastic-agent.exe uninstall'
+  args:
     chdir: 'c:\Program Files\Elastic\Agent'
-    responses:
-      Question:
-        - y
   when: agent_folder.stat.exists
 
 - name: Download Elastic Agent
