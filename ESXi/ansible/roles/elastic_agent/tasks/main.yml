@@ -1,9 +1,27 @@
 ---
 
+- name: Check for prior agent install
+  win_stat: 
+    path: 'c:\Tools\elastic-agent-8.0.0-windows-x86_64'
+  register: agent_folder
+
+- name: removing old installiation
+  win_shell: ".\\elastic-agent.exe uninstall"
+  args:
+    chdir: 'c:\Tools\elastic-agent-8.0.0-windows-x86_64'
+  when: agent_folder.stat.exists
+
+- name: Remove old installation directory
+  windows.win_file:
+    path: 'c:\Tools\elastic-agent-8.0.0-windows-x86_64'
+    state: absent
+  when: agent_folder.stat.exists
+
 - name: Download Elastic Agent
   win_get_url:
     url: 'https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.0.0-windows-x86_64.zip'
     dest: 'C:\Tools\elastic-agent-8.0.0-windows-x86_64.zip'
+
 
 - name: Unzip Elastic Agent
   win_unzip:
@@ -11,9 +29,17 @@
     dest: 'c:\Tools'
     remote_src: yes
 
+
+
+
+- name: Copy over Certificate Authorty (ca.crt) 
+  copy:
+    src: ../ca.crt
+    dest: c:\Tools\elastic-agent-8.0.0-windows-x86_64\ca.crt
+
 - name: Installing ElasticAgent
   #replace server IP:PORT and enrollment token from Fleet <Add Agent>
-  win_shell: ".\\elastic-agent.exe install -f --insecure --url=https://192.168.56.101:8220 --enrollment-token=cmYzSU1uOEJVTUVMRWlscDNqZmU6NklYVXFlcVlUbTZGN3N2YjZ0eTg1Zw=="
+  win_shell: ".\\elastic-agent.exe install -f --insecure --url=https://192.168.56.101:8220 --enrollment-token=cmYzSU1uOEJVTUVMRWlscDNqZmU6NklYVXFlcVlUbTZGN3N2YjZ0eTg1Zw== --certificate-authorities=ca.crt"
   args:
     chdir: 'c:\Tools\elastic-agent-8.0.0-windows-x86_64'
   register: elastic_agent_install
