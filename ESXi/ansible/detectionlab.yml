@@ -22,7 +22,7 @@
 #    - common
 #    - winlogbeats
 #    - ghost
-#    - elastic_agent
+    - elastic_agent
   tags: win10-1
 
 - hosts: win10-2
