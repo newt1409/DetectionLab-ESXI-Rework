@@ -4,14 +4,16 @@
   roles:
 #    - dc
 #    - common
-    - winlogbeats
+#    - winlogbeats
+    - elastic_agent
   tags: dc
 
 - hosts: exchange
   roles:
 #    - exchange
 #    - common
-    - winlogbeats
+#    - winlogbeats
+    - elastic_agent
   tags: exchange
 
 - hosts: win10-1
@@ -20,29 +22,32 @@
 #    - common
 #    - winlogbeats
 #    - ghost
-    - elastic_agent
+#    - elastic_agent
   tags: win10-1
 
 - hosts: win10-2
   roles:
 #    - win10-2
 #    - common
-    - winlogbeats
+#    - winlogbeats
 #    - ghost
+    - elastic_agent
   tags: win10-2
   
 - hosts: win10-3
   roles:
 #    - win10-3
 #    - common
-    - winlogbeats
+#    - winlogbeats
 #    - ghost
+    - elastic_agent
   tags: win10-3
 
 - hosts: win10-4
   roles:
 #    - win10-4
 #    - common
-    - winlogbeats
+#    - winlogbeats
 #    - ghost
+    - elastic_agent
   tags: win10-4    
