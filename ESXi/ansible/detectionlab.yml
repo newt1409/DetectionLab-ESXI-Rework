@@ -18,8 +18,9 @@
   roles:
 #    - win10-1
 #    - common
-    - winlogbeats
+#    - winlogbeats
 #    - ghost
+    - elastic_agent
   tags: win10-1
 
 - hosts: win10-2

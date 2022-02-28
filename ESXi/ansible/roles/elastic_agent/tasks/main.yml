@@ -1,0 +1,20 @@
+---
+
+- name: Download Elastic Agent
+  win_shell: |
+    wget https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.0.0-windows-x86_64.zip -OutFile elastic-agent-8.0.0-windows-x86_64.zip
+    Expand-Archive .\elastic-agent-8.0.0-windows-x86_64.zip
+  args:
+    chdir: 'c:\Tools\ElasticAgent'
+  register: elastic_agent_download
+  failed_when: "'Exception' in elastic_agent_download.stdout"
+
+- name: Installing ElasticAgent
+  #replace server IP:PORT and enrollment token from Fleet <Add Agent>
+  win_shell: ".\elastic-agent.exe install --url=http://192.168.56.101:8220 --enrollment-token=cmYzSU1uOEJVTUVMRWlscDNqZmU6NklYVXFlcVlUbTZGN3N2YjZ0eTg1Zw=="
+  args:
+    chdir: 'c:\Tools\ElasticAgent'
+  register: elastic_agent_install
+  failed_when: "'Exception' in elastic_agent_download.stdout"
+
+- debug: msg="{{ ElasticAgent.stdout_lines }}"
