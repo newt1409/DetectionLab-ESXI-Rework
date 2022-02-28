@@ -2,19 +2,16 @@
 
 - name: Check for prior agent install
   win_stat: 
-    path: 'c:\Tools\elastic-agent-8.0.0-windows-x86_64'
+    path: 'c:\Program Files\Elastic\Agent'
   register: agent_folder
 
-- name: removing old installiation
-  win_shell: ".\\elastic-agent.exe uninstall"
-  args:
-    chdir: 'c:\Tools\elastic-agent-8.0.0-windows-x86_64'
-  when: agent_folder.stat.exists
-
-- name: Remove old installation directory
-  windows.win_file:
-    path: 'c:\Tools\elastic-agent-8.0.0-windows-x86_64'
-    state: absent
+- name: Uninstalling Elastic Agent
+  expect:
+    command: '\elastic-agent.exe uninstall'
+    chdir: 'c:\Program Files\Elastic\Agent'
+    responses:
+      Question:
+        - y
   when: agent_folder.stat.exists
 
 - name: Download Elastic Agent
@@ -22,15 +19,13 @@
     url: 'https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.0.0-windows-x86_64.zip'
     dest: 'C:\Tools\elastic-agent-8.0.0-windows-x86_64.zip'
 
-
 - name: Unzip Elastic Agent
   win_unzip:
     src: 'c:\Tools\elastic-agent-8.0.0-windows-x86_64.zip'
-    dest: 'c:\Tools'
+    dest: 'c:\Tools\Elastic_Agent'
+    recurse: yes
     remote_src: yes
-
-
-
+    delete_archive: yes
 
 - name: Copy over Certificate Authorty (ca.crt) 
   copy:
@@ -51,3 +46,9 @@
   win_file:
     path: c:\Tools\elastic-agent-8.0.0-windows-x86_64.zip
     state: absent
+
+- name: Remove installation directory
+  ansible.windows.win_file:
+    path: 'c:\Tools\elastic-agent-8.0.0-windows-x86_64'
+    state: absent
+  
