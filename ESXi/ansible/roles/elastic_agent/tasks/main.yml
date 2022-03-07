@@ -17,12 +17,17 @@
     dest: 'C:\Tools\elastic-agent-8.0.0-windows-x86_64.zip'
 
 - name: Unzip Elastic Agent
-  win_unzip:
-    src: 'c:\Tools\elastic-agent-8.0.0-windows-x86_64.zip'
-    dest: 'c:\Tools\Elastic_Agent'
-    recurse: yes
-    remote_src: yes
-    delete_archive: yes
+  win_shell: 'Expand-Archive elastic-agent-8.0.0-windows-x86_64.zip'
+  args:
+    chdir: 'c:\Tools'
+
+#- name: Unzip Elastic Agent
+#  win_unzip:
+#    src: 'c:\Tools\elastic-agent-8.0.0-windows-x86_64.zip'
+#    dest: 'c:\Tools\Elastic_Agent'
+#    recurse: yes
+#    remote_src: yes
+#    delete_archive: yes
 
 - name: Copy over Certificate Authorty (ca.crt) 
   copy:
