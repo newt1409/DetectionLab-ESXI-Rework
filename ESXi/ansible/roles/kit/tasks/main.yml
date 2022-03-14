@@ -2,7 +2,7 @@
 
 - name: Set hostname to logger
   hostname:
-    name: logger
+    name: kit
   become: yes
 
 - name: Create a directory if it does not exist
