@@ -9,15 +9,7 @@ cat <<EOF >/etc/netplan/01-netcfg.yaml;
 network:
   version: 2
   ethernets:
-    #windomain.local
     eth0:
-      dhcp4: true
-#      addresses: [192.168.56.100/24]
-    eth1:
-      dhcp4: true
-    eth2:
-      dhcp4: true
-    eth3:
       dhcp4: true
 EOF
 else
