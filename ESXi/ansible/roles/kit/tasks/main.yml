@@ -41,14 +41,17 @@
   shell: netplan apply
   become: yes
 
-#- name: Add APT Repositories
-#  apt_repository:
-#    repo: "{{ item }}"
-#  with_items:
-#    - "ppa:apt-fast/stable"
-#    - "ppa:rmescandon/yq"
+- name: Reboot to clean up changes
+  reboot:
+
+- name: Add APT Repositories
+  apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - "ppa:apt-fast/stable"
+    - "ppa:rmescandon/yq"
 #    - "ppa:oisf/suricata-stable"
-#  become: yes
+  become: yes
 
 - name: Install apt-fast
   become: yes
