@@ -86,10 +86,10 @@ resource "esxi_guest" "kit" {
 
     provisioner "remote-exec" {
     inline = [
-      "sudo ifconfig eth0 up && echo 'eth0 up' || echo 'unable to bring eth0 interface up",
-      "sudo ifconfig eth1 up && echo 'eth1 up' || echo 'unable to bring eth1 interface up",
-      "sudo ifconfig eth2 up && echo 'eth2 up' || echo 'unable to bring eth2 interface up",
-      "sudo ifconfig eth3 up && echo 'eth3 up' || echo 'unable to bring eth3 interface up"
+      "sudo ip link set eth0 up && echo 'eth0 up' || echo 'unable to bring eth0 interface up",
+      "sudo ip link set eth1 up && echo 'eth1 up' || echo 'unable to bring eth1 interface up",
+      "sudo ip link set eth2 up && echo 'eth2 up' || echo 'unable to bring eth2 interface up",
+      "sudo ip link set eth3 up && echo 'eth3 up' || echo 'unable to bring eth3 interface up"
     ]
 
     connection {
@@ -100,7 +100,7 @@ resource "esxi_guest" "kit" {
     }
   }
   network_interfaces {
-    virtual_network = var.vm_wan
+    virtual_network = var.hostonly_network
     mac_address     = "00:50:58:a1:b1:c1"
     nic_type        = "e1000"
   }
@@ -110,7 +110,7 @@ resource "esxi_guest" "kit" {
     nic_type        = "e1000"
   }
   network_interfaces {
-    virtual_network = var.hostonly_network
+    virtual_network = var.vm_wan
     mac_address     = "00:50:58:a1:b1:c3"
     nic_type        = "e1000"
   }
