@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Mon Mar 14 2022 14:48:35 GMT-0500 (Central Daylight Time)
+------------------------------------------------------
+
+Modified files:
+* ESXi/Packer/scripts/networking.sh
+
+
+Created files:
+* .autogit/logs/log-14-2-2022-14-18-58.txt
+
+
+Deleted files:
+* ESXi/Packer/scripts/networking_orig.sh
+
+
+Renamed files:
