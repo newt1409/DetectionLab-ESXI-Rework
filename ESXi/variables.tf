@@ -23,6 +23,10 @@ variable "esxi_datastore" {
   default = "datastore2"
 }
 
+variable "vm_wan" {
+  default = "WAN"  
+}
+
 variable "vm_network" {
   default = "LAN"
 }
@@ -30,4 +34,7 @@ variable "vm_network" {
 variable "hostonly_network" {
   default = "windomain.local"
 }
+
+variable "red_space" {
+  default = "Red_Space"
 
