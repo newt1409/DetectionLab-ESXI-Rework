@@ -1,0 +1,19 @@
+-------------------- Auto-Git Log --------------------
+		Mon Mar 14 2022 14:18:28 GMT-0500 (Central Daylight Time)
+------------------------------------------------------
+
+Modified files:
+* ESXi/Packer/scripts/networking.sh
+* ESXi/ansible/roles/kit/tasks/main.yml
+* ESXi/resources/01-netcfg.yaml
+
+
+Created files:
+* .autogit/logs/log-14-2-2022-13-34-4.txt
+* ESXi/Packer/scripts/networking_orig.sh
+
+
+Deleted files:
+
+
+Renamed files:
