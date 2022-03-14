@@ -37,4 +37,4 @@ variable "hostonly_network" {
 
 variable "red_space" {
   default = "Red_Space"
-
+}
