@@ -17,7 +17,15 @@
 
 #issue where win2016 adapter goes offline from ESXi issues due to my version so old
 - name: Create daily restart of netadapter
-  win_shell: schtasks /create /tn 'Netadapter restart' /tr "powershell -command &{Restart-NetAdapter (get-netadapter | where {$_.MacAddress -eq '00-50-56-A1-B1-C4'}).Name}'" /sc daily /st 0800
+  win_scheduled_task:
+    name: NetAdapter Restart
+    username: SYSTEM
+    actions:
+      - path: powershell.exe
+        arguments: Restart-NetAdapter (Get-NetAdapter | where {$_.MacAddress -eq '00-50-56-A1-B1-C4'}).Name
+    triggers:
+      - type: daily
+        start_boundary: '2021-12-31T08:00:00'
 
 - name: Install git
   win_chocolatey:
