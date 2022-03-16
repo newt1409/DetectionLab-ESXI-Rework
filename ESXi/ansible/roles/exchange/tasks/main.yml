@@ -15,6 +15,18 @@
 - name: Set HostOnly DNS Address
   win_shell: "$adapter = (get-netadapter | where {$_.MacAddress -eq '00-50-56-A1-B4-C5'}).Name; Set-DnsClientServerAddress -InterfaceAlias $adapter -ServerAddresses 192.168.56.102,8.8.8.8"
 
+#issue where win2016 adapter goes offline from ESXi issues due to my version so old
+- name: Create daily restart of netadapter
+  win_scheduled_task:
+    name: NetAdapter Restart
+    username: SYSTEM
+    actions:
+      - path: powershell.exe
+        arguments: Restart-NetAdapter *
+    triggers:
+      - type: daily
+        start_boundary: '2021-12-31T08:00:00'
+
 - name: Install git
   win_chocolatey:
     name: git
