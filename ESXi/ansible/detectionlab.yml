@@ -1,10 +1,5 @@
 ---
 
-- hosts: kit
-  roles:
-#    - kit
-  tags: kit
-
 - hosts: dc
   roles:
     - dc
