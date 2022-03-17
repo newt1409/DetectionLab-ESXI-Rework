@@ -165,14 +165,15 @@ setup.dashboards.enabled: false
 #-------------------------- Elasticsearch output ------------------------------
 output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: ["https://192.168.56.101:9200"]
+  hosts: ["192.168.56.101:9200"]
   #idle_time: "10s"
   #max_retries: 5
   #bulk_max_size: 1
   #flush_interval: 10
   #timeout: "45s"
   # Optional protocol and basic auth credentials.
-  #protocol: "http" 
+  protocol: "https" 
+  ssl.verification_mode: "none"
   username: "elastic" 
   password: "password" 
 
