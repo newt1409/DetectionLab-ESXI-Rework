@@ -177,7 +177,7 @@ output.elasticsearch:
   password: "password" 
 
 #----------------------------- Logstash output --------------------------------
-output.logstash:
+#output.logstash:
   # The Logstash hosts
   #hosts: ["192.168.56.101:5044"]
 
