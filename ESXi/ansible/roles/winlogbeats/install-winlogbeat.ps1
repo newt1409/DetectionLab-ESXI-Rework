@@ -163,9 +163,9 @@ setup.dashboards.enabled: false
 # Configure what output to use when sending the data collected by the beat.
 
 #-------------------------- Elasticsearch output ------------------------------
-#output.elasticsearch:
+output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: ["192.168.56.101:9200"]
+  hosts: ["https://192.168.56.101:9200"]
   #idle_time: "10s"
   #max_retries: 5
   #bulk_max_size: 1
