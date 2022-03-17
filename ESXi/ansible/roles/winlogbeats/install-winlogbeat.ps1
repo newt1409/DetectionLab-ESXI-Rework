@@ -165,7 +165,7 @@ setup.dashboards.enabled: false
 #-------------------------- Elasticsearch output ------------------------------
 #output.elasticsearch:
   # Array of hosts to connect to.
-  #hosts: ["192.168.56.101:9200"]
+  hosts: ["192.168.56.101:9200"]
   #idle_time: "10s"
   #max_retries: 5
   #bulk_max_size: 1
@@ -173,13 +173,13 @@ setup.dashboards.enabled: false
   #timeout: "45s"
   # Optional protocol and basic auth credentials.
   #protocol: "http" 
-  #username: "elastic" 
-  #password: "password" 
+  username: "elastic" 
+  password: "password" 
 
 #----------------------------- Logstash output --------------------------------
 output.logstash:
   # The Logstash hosts
-  hosts: ["192.168.56.101:5044"]
+  #hosts: ["192.168.56.101:5044"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
