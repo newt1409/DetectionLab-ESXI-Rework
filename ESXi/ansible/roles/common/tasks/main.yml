@@ -61,3 +61,15 @@
   register: utilities
   failed_when: "'Exception' in utilities.stdout"
   ignore_errors: true
+
+#issue where windows adapter goes offline from ESXi issues due to my version so old
+- name: Create daily restart of netadapter
+  win_scheduled_task:
+    name: NetAdapter Restart
+    username: SYSTEM
+    actions:
+      - path: powershell.exe
+        arguments: Restart-NetAdapter *
+    triggers:
+      - type: daily
+        start_boundary: '2021-12-31T08:00:00'
