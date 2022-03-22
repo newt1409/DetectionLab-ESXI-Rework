@@ -21,33 +21,33 @@
 #    - win10-1
 #    - common
 #    - winlogbeats
-    - ghost
+#    - ghost
 #    - elastic_agent
   tags: win10-1
 
 - hosts: win10-2
   roles:
 #    - win10-2
-    - common
+#    - common
 #    - winlogbeats
-#    - ghost
+    - ghost
 #    - elastic_agent
   tags: win10-2
   
 - hosts: win10-3
   roles:
 #    - win10-3
-    - common
+#    - common
 #    - winlogbeats
-#    - ghost
+    - ghost
 #    - elastic_agent
   tags: win10-3
 
 - hosts: win10-4
   roles:
 #    - win10-4
-    - common
+#    - common
 #    - winlogbeats
-#    - ghost
+    - ghost
 #    - elastic_agent
   tags: win10-4    
