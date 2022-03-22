@@ -9,12 +9,12 @@
     "ClientResults": {
         "IsEnabled": true,
         "IsSecure": false,
-        "PostUrl": "http://ghosts-api:52388/api/clientresults",
+        "PostUrl": "http://10.0.0.90:52388/api/clientresults",
         "CycleSleep": 300000
     },
     "ClientUpdates": {
         "IsEnabled": true,
-        "PostUrl": "http://ghosts-api:52388/api/clientupdates",
+        "PostUrl": "http://10.0.0.90:52388/api/clientupdates",
         "CycleSleep": 300000
     },
     "Survey": {
@@ -23,7 +23,7 @@
         "Frequency": "once",
         "CycleSleepMinutes": 5,
         "OutputFormat": "indent",
-        "PostUrl": "http://ghosts-api:52388/api/clientsurvey"
+        "PostUrl": "http://10.0.0.90:52388/api/clientsurvey"
     },
     "Content": {
         "EmailContent": "",
