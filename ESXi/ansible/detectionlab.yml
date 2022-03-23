@@ -21,8 +21,9 @@
 #    - win10-1
 #    - common
 #    - winlogbeats
-    - ghost
+#    - ghost
 #    - elastic_agent
+    - office
   tags: win10-1
 
 - hosts: win10-2
