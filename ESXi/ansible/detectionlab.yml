@@ -21,9 +21,9 @@
 #    - win10-1
 #    - common
 #    - winlogbeats
-#    - ghost
+#    - office
+    - ghost
 #    - elastic_agent
-    - office
   tags: win10-1
 
 - hosts: win10-2
@@ -31,7 +31,8 @@
 #    - win10-2
 #    - common
 #    - winlogbeats
-    - ghost
+    - office
+#    - ghost
 #    - elastic_agent
   tags: win10-2
   
@@ -40,7 +41,8 @@
 #    - win10-3
 #    - common
 #    - winlogbeats
-    - ghost
+    - office
+#    - ghost
 #    - elastic_agent
   tags: win10-3
 
@@ -49,6 +51,7 @@
 #    - win10-4
 #    - common
 #    - winlogbeats
-    - ghost
+    - office
+#    - ghost
 #    - elastic_agent
   tags: win10-4    
