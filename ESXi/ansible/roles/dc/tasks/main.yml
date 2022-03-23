@@ -162,4 +162,8 @@
     - "wevtutil el | Select-String -notmatch \"Microsoft-Windows-LiveId\" | Foreach-Object {wevtutil cl \"$_\"}"
     - "Set-SmbServerConfiguration -AuditSmb1Access $true -Force"
 
-
+- name: Add shared drive for tool use
+  win_shell: "{{ item }}"
+  with_items:
+    - "New-Item "C:\Tools\Shared" -type Directory"
+    - "New-SMBShare -name "Tools" -path "C:\Tools\Shared" -ContinouslyAvailable 0 -FullAccess everyone
