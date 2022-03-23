@@ -9,41 +9,7 @@
             "Loop": "True",
             "TimeLineEvents": [
                 {
-                    "Command": "explorer \\\\nec-file\\base",
-                    "CommandArgs": [
-                        "exit"
-                    ],
-                    "DelayAfter": 900000,
-                    "DelayBefore": 0
-                }
-            ]
-        },
-        {
-            "HandlerType": "Command",
-            "Initial": "",
-            "UtcTimeOn": "00:00:00",
-            "UtcTimeOff": "24:00:00",
-            "Loop": "True",
-            "TimeLineEvents": [
-                {
-                    "Command": "explorer \\\\nec-file\\schedule",
-                    "CommandArgs": [
-                        "exit"
-                    ],
-                    "DelayAfter": 900000,
-                    "DelayBefore": 0
-                }
-            ]
-        },
-        {
-            "HandlerType": "Command",
-            "Initial": "",
-            "UtcTimeOn": "00:00:00",
-            "UtcTimeOff": "24:00:00",
-            "Loop": "True",
-            "TimeLineEvents": [
-                {
-                    "Command": "explorer \\\\nec-file\\reports",
+                    "Command": "explorer \\\\dc\\tools",
                     "CommandArgs": [
                         "exit"
                     ],
@@ -95,7 +61,7 @@
             "TimeLineEvents": [
                 {
                     "Command": "create",
-                    "CommandArgs": [ "%homedrive%%homepath%\\Documents" ],
+                    "CommandArgs": [ "%homepath%\\Documents" ],
                     "DelayAfter": 900000,
                     "DelayBefore": 0
                 }
@@ -110,7 +76,7 @@
             "TimeLineEvents": [
                 {
                     "Command": "create",
-                    "CommandArgs": [ "%homedrive%%homepath%\\Documents" ],
+                    "CommandArgs": [ "%homepath%\\Documents" ],
                     "DelayAfter": 900000,
                     "DelayBefore": 0
                 }
@@ -125,7 +91,7 @@
             "TimeLineEvents": [
                 {
                     "Command": "create",
-                    "CommandArgs": [ "%homedrive%%homepath%\\Documents" ],
+                    "CommandArgs": [ "%homepath%\\Documents" ],
                     "DelayAfter": 900000,
                     "DelayBefore": 0
                 }
