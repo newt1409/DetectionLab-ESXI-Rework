@@ -2,32 +2,6 @@
     "Status": "Run",
     "TimeLineHandlers": [
         {
-            "HandlerType": "BrowserChrome",
-            "HandlerArgs": {
-                "isheadless": "false",
-                "blockimages": "false",
-                "blockstyles": "false",
-                "blockflash": "false",
-                "blockscripts": "false",
-                "stickiness": "65",
-                "stickiness-depth-min": "3",
-                "stickiness-depth-max": "15",
-                "incognito": "true",
-                "javascript-enable": "true",
-                "visited-remember": "10"
-            },
-            "Initial": "about:blank",
-            "UtcTimeOn": "00:00:00",
-            "UtcTimeOff": "24:00:00",
-            "Loop": "True",
-            "TimeLineEvents": [
-                {
-                    "Command": "random",
-                    "CommandArgs": [
-                        {
-    "Status": "Run",
-    "TimeLineHandlers": [
-        {
             "HandlerType": "Command",
             "Initial": "",
             "UtcTimeOn": "00:00:00",
@@ -78,7 +52,6 @@
                 }
             ]
         },
-
         {
             "HandlerType": "Outlook",
             "Initial": "",
@@ -179,7 +152,7 @@
                 {
                     "Command": "random",
                     "CommandArgs": [
-	                "https://mag.wcoomd.org/uploads/2018/05/blank.pdf",
+	                    "https://mag.wcoomd.org/uploads/2018/05/blank.pdf",
                         "http://www.ceoexpress.com",
                         "http://wikipedia.org",
                         "http://ebay.com",
@@ -697,14 +670,6 @@
                             "Category": "cat1",
                             "Method": "DELETE"
                         }
-                    ],
-                    "DelayAfter": 3000,
-                    "DelayBefore": 0
-                }
-            ]
-        }
-    ]
-}"https://mag.wcoomd.org/uploads/2018/05/blank.pdf"
                     ],
                     "DelayAfter": 3000,
                     "DelayBefore": 0
